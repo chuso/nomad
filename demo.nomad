@@ -3,6 +3,14 @@ job "demo" {
   type = "service"
   group "demo" {
     count = 3
+    update {
+      max_parallel     = 1
+      canary           = 1
+      min_healthy_time = "30s"
+      auto_revert      = true
+      auto_promote     = false
+    }
+
     task "bootcamp" {
       driver = "docker"
       config {
